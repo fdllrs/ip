@@ -1,3 +1,4 @@
+import Text.Read.Lex (Number)
 f :: Integer -> Integer
 
 -- ejercicio 1a
@@ -15,7 +16,9 @@ g 16 = 4
 g 131 = 1
 g x = -1
 
+h :: Integer -> Integer
 h x = f (g x)
+k :: Integer -> Integer
 k x = g (f x)
 
 
@@ -51,6 +54,7 @@ maximoAbsoluto x y | absoluto x > absoluto y = absoluto x
 -- Asegura: {res = z si z es el mayor de todos }
 --}
 
+maximoDe3 :: Ord a => a -> a -> a -> a
 maximoDe3 x y z | x > y && x > z =  x
                 | y > x && y > z =  y
                 | z > x && z > y =  z
@@ -137,21 +141,42 @@ esMultiploDe x y | remainder == 0 = True
 
 -- i)
 -- problema digitoUnidades(x:Int): Int {
--- requere: {True}
+-- requere: {x sea natural}
 -- Asegura: {res será el dígito de las unidades de x}
 --}
 
 
 
+digitoUnidades :: Integer -> Integer
+
+digitoUnidades x | x < 10 = x
+                 | otherwise = remainder
+                 where (_,remainder) = divMod x 10
+
+
+
+-- j)
+-- problema digitoDecenas(x:Int): Int {
+-- requere: {x sea natural}
+-- Asegura: {res será el dígito de las decenas de x}
+--}
+
+digitoDecenas :: Integer -> Integer
+digitoDecenas x = mod (div x 10) 10
 
 
 
 
 
-
-
-
-
+--------------------------------------------------------------
+-- Ejercicio 3
+--------------------------------------------------------------
+estanRelacionados :: Float -> Float -> Bool
+estanRelacionados a b | (a == 0) || (b == 0) = False
+                      | a * a + a * b * k == 0.0 = True
+                      | otherwise = False
+                      where k = -a / b
+                        
 
 
 

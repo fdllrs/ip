@@ -98,3 +98,100 @@ primerDigito x | x < 10 = x
 sacarUltPrim :: Integer -> Integer
 sacarUltPrim x | x <  10 = x
                | otherwise = sacarUltimoDigito (mod x (10 ^ (cantDigitos x -1)))
+
+
+--EJ 10
+
+
+--a
+-- problema f1(n:entero):naturales {
+-- requiere : {n natural}
+-- asegura : {res = la suma de todas
+-- las potencias de 2 desde 0 hasta n }
+-- }
+f1 :: Integer -> Integer
+f1 0 = 1
+f1 x = (2^x) + f1 (x-1)
+
+
+-- b
+-- problema f2(q:real, n:entero): Real {
+-- requiere : {true}
+-- asegura : {res = sumatoria de q^i desde i=1 hasta n}
+-- }
+f2 :: Float -> Integer -> Float
+f2 0 _ = 0
+f2 q n | q <= 0 || n < 1 = 0
+       | otherwise = (q^n) + f2 q (n-1)
+
+
+-- c
+-- problema f3(n:natural, q:real):real
+-- requiere : {true}
+-- asegura : {res = sumatoria de q^i desde i=1 hasta 2n}
+-- }
+
+f3 :: Float -> Integer -> Float
+f3 0 _ = 0
+f3 _ 0 = 1
+f3 q n = (q^(2*n)) + (q^((2*n) -1 )) + f3 q (n-1)
+
+
+-- d
+-- problema f4(n:natural, q:real):real
+-- requiere : {true}
+-- asegura : {res = sumatoria de q^i desde i=n hasta 2n}
+-- }
+
+f4 :: Float -> Integer -> Float
+f4 0 _ = 0
+f4 _ 0 = 1
+f4 q n = (q^(2*n)) +  (q^((2*n) -1 )) + f4 q (n-1)
+
+-- EJ 11
+
+
+-- a
+factorial :: Float -> Float
+factorial 1 = 1
+factorial n = n * factorial (n-1)
+
+eAprox :: Float -> Float
+
+eAprox 0 = 1
+eAprox i  = (1.0 / factorial i ) + eAprox (i-1)
+
+
+-- b
+eConst :: Float
+eConst = eAprox 10
+
+-- EJ 12
+-- problema raizDe2Aprox(i:integer):float {
+-- requiere {i >0}
+-- asegura {res = aproximación de raiz de 2 con i términos dada por la fórmula  1/(An-1)}
+-- }
+
+raizDe2Aprox :: Integer -> Float
+raizDe2Aprox 1 = 1
+raizDe2Aprox i = 1/raizDe2Aprox (i-1)
+
+
+
+
+
+--EJ 13
+primerSumatoria :: Integer -> Integer -> Integer
+
+primerSumatoria _ 0 = 0
+primerSumatoria n m = (n ^ m) + primerSumatoria n (m-1)
+
+
+sumaDoble :: Integer -> Integer -> Integer
+sumaDoble 1 m = m
+sumaDoble n m = primerSumatoria n m + sumaDoble (n-1) m
+
+
+--EJ 14
+sumaPotencias :: Integer ->Integer ->Integer ->Integer
+sumaPotencias q n m = 1
